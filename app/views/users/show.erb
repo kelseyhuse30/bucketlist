@@ -1,0 +1,8 @@
+<h3><%=@user.username%>'s Bucketlist</h3>
+
+<% @user.items.each do |item| %>
+<ul>
+	<li><a href="/items/<%=item.id%>"><%=item.name%></a></li>
+</ul>
+
+<% end %>
