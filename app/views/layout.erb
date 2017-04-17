@@ -4,24 +4,40 @@
     <title>Bucketlist</title>    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Lato" rel="stylesheet">
-    <link rel="stylesheet" href="<%= stylesheet_path "main" %>">
+    <link rel="stylesheet" href="/stylesheets/main.css">
   </head>
 
   <body>
-    <nav>
-      <% if logged_in? %>
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="#">Bucketlist</a>
 
-        <p><%=current_user.username%></p>
-        <a href="/account">My Bucketlist</a>
-        <a href="/logout">Log Out</a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <% if logged_in? %>
 
-      <% else %>
-        <a href="/signup">Sign Up</a>
-        <a href="/login">Sign In</a>
-      <% end %>
+            <li class="nav-item active">
+              <a class="nav-link" href="#"><%=current_user.username%><span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Log Out</a>
+            </li>
 
+          <% else %>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/signup">Sign Up</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Sign In</a>
+            </li>
+
+          <% end %> 
+        </ul>
+      </div>
     </nav>
-
 
     <%= yield %>
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
