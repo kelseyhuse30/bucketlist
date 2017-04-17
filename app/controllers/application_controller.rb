@@ -7,6 +7,11 @@ class ApplicationController < Sinatra::Base
 	end
 
 	get '/' do
+    @user = User.find_by_id(session[:user_id])
+    if @user
+      redirect '/account'
+    end
+    @items = Item.all
 		erb :index
 	end
 
@@ -33,7 +38,7 @@ class ApplicationController < Sinatra::Base
     @user = User.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      redirect to "/account"
+      redirect to "/success"
     else
       redirect to "/failure"
     end
@@ -41,7 +46,7 @@ class ApplicationController < Sinatra::Base
 
   get '/success' do
     if logged_in?
-      erb :success
+      redirect '/account'
     else
       redirect "/login"
     end
@@ -51,15 +56,80 @@ class ApplicationController < Sinatra::Base
   	erb :failure
   end
 
+  get '/logout' do
+    session.clear
+    redirect '/'
+  end
+
   get '/account' do
   	@user = User.find_by_id(session[:user_id])
   	erb :'users/show'
   end
 
   get '/items/new' do
+    erb :'items/new'
+  end
+
+  post '/items' do
+    @item = Item.create(params[:item])
+    @item.user_id = current_user.id
+    @item.save
+
+    if !params[:category].empty?
+      @category = Category.find_or_create_by(name: params[:category][:name])
+      @item.category_id == @category.id
+      @item.save
+    end
+
+    redirect to "/items/#{@item.id}"
+  end
+
+  get '/items/:id' do
+    @item = Item.find_by_id(params[:id])
+    erb :'items/show'
+  end
+
+  get '/items/:id/edit' do
+    if logged_in?
+      @item = Item.find_by_id(params[:id])
+      if @item.user_id == current_user.id
+       erb :'items/edit'
+      else
+        redirect to '/'
+      end
+    else
+      redirect to '/login'
+    end
+  end
+
+  patch '/items/:id' do
+    if params[:item][:name] == "" || params[:item][:description] == "" || params[:item][:location] == "" || params[:item][:category_id] == ""
+      redirect to "/items/#{params[:id]}/edit"
+    else
+      @item = Item.find_by_id(params[:id])
+      @item.update(params[:item])
+      @item.save
+
+      if !params[:category].empty?
+        @category = Category.find_or_create_by(name: params[:category][:name])
+        @item.category_id == @category.id
+        @item.save
+      end
+
+      redirect to "/items/#{@item.id}"
+    end
+  end
+
+  delete '/items/:id/delete' do
+    @item = Item.find_by_id(params[:id])
+    if @item.user_id == current_user.id
+      @item.delete
+    end
+    redirect '/'
   end
 
   helpers do
+
     def logged_in?
       !!session[:user_id]
     end

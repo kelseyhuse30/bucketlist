@@ -1,0 +1,26 @@
+<h1>Edit <%= @item.name %></h1>
+
+<form action="/items/<%=@item.id %>" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  
+  <label>Bucket List Item Name </label>
+  <input type="text" name="name" value="<%=@item.name %>"> </br>
+
+  <label>Description </label>
+  <input type="text" name="description" value="<%=@item.description %>"> </br>
+
+  <label>Location</label>
+  <input type="text" name="location" value="<%=@item.location %>"> </br>
+
+  <label>Category:</label>
+  <% Category.all.each do |category| %>
+    <label><%=category.name%></label>
+    <input type="radio" name="item[category_id]" id="<%=category.id%>" value="<%=category.id%>" <%='checked' if @item.category_id == category.id %>></input>
+  <%end%>
+  <br></br>
+
+  <label>Or add new category:</label>
+  <input type="text" name="category[name]"></input>
+
+  <input type="submit" value="Update">
+</form>

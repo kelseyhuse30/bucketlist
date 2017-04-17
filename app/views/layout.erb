@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Bucketlist</title>
+    <title>Bucketlist</title>    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Lato" rel="stylesheet">
+    <link rel="stylesheet" href="<%= stylesheet_path "main" %>">
   </head>
 
   <body>
@@ -11,9 +12,8 @@
       <% if logged_in? %>
 
         <p><%=current_user.username%></p>
-        <a href="/items/new">Add Bucketlist Item</a>
+        <a href="/account">My Bucketlist</a>
         <a href="/logout">Log Out</a>
-        
 
       <% else %>
         <a href="/signup">Sign Up</a>

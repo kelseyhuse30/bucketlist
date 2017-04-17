@@ -1,0 +1,27 @@
+<h1>Add to your Bucketlist</h1>
+ 
+<form action="/items" method="post">
+  <label>Bucketlist Item:</label>
+  <input type="text" name="item[name]">
+  <br></br>
+
+  <label>Description:</label>
+  <input type="text" name="item[description]">
+  <br></br>
+
+  <label>Location:</label>
+  <input type="text" name="item[location]">
+  <br></br>
+
+  <label>Choose category:</label>
+  <% Category.all.each do |category| %>
+    <label><%=category.name%></label>
+    <input type="radio" name="item[category_id]" id="<%=category.id%>" value="<%=category.id%>"></input>
+  <%end%>
+  <br></br>
+
+  <label>Or add new category:</label>
+  <input type="text" name="category[name]"></input>
+
+  <input type="submit" value="Add to Bucketlist">
+</form>

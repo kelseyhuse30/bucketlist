@@ -1,1 +1,8 @@
 <h1>Bucketlist</h1>
+<h3>Explore what our users' want to achieve in their lifetime</h3>
+
+<ol>
+<% @items.each do |item| %>
+	<li><a href="items/<%=item.id%>"><%=item.name%></a></li>
+<% end %>
+</ol>
