@@ -1,16 +1,22 @@
 <h1><%= @item.name %></h1>
 
-<h3>Description: <%= @item.description %></h3>
-<h3>Location: <%= @item.location %></h3>
-<h3>Category: <%= @item.category.name %></h3>
+<div class="view">
 
-<% if @item.user_id == current_user.id %>
+	<h3>Description: <%= @item.description %></h3>
+	<h3>Location: <%= @item.location %></h3>
+	<h3>Category: <%= @item.category.name %></h3>
 
-	<a href="/items/<%=@item.id%>/edit">Edit</a>
+	<% if @item.user_id == current_user.id %>
 
-	 <form action="/items/<%=@item.id%>/delete" method="post">
-	  <input id="hidden" type="hidden" name="_method" value="delete">
-	  <input type="submit" value="Delete">
-	</form>
+		<div class="btn-group" role="group">
+			<button><a href="/items/<%=@item.id%>/edit">Edit</a></button>
 
-<% end %>
+		 <form action="/items/<%=@item.id%>/delete" method="post">
+		  <input id="hidden" type="hidden" name="_method" value="delete">
+		  <input class="button_holder" type="submit" value="Delete">
+		</form>
+	</div>
+
+	<% end %>
+
+</div>

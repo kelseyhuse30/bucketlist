@@ -18,17 +18,19 @@ h1, body a {
 	color: white;
 }
 
-form label, form input {
+form input {
 	font-family: 'Fredoka One', cursive;
 }
 
 
-form {
-	border: black 2px;
+div.view {
+	border: solid black 2px;
 	background-color: white;
 	padding: 10px;
+	font-family: 'Fredoka One', cursive;
 }
 
-.button_holder {
+.button_holder, div.view a {
 	text-align: center;
+	color: black;
 }

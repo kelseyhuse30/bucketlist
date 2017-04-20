@@ -1,3 +1,4 @@
+require 'pry'
 class ApplicationController < Sinatra::Base
 
 	configure do
@@ -71,11 +72,15 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/items' do
+    if params[:item][:name] == "" || params[:item][:description] == "" || params[:item][:location] == "" || (params[:item][:category_id] == nil && params[:category][:name] == "")
+      redirect to 'items/new'
+    end
+
     @item = Item.create(params[:item])
     @item.user_id = current_user.id
     @item.save
 
-    if !params[:category].empty?
+    if !params[:category][:name].empty?
       @category = Category.find_or_create_by(name: params[:category][:name])
       @item.category_id == @category.id
       @item.save
@@ -103,14 +108,14 @@ class ApplicationController < Sinatra::Base
   end
 
   patch '/items/:id' do
-    if params[:item][:name] == "" || params[:item][:description] == "" || params[:item][:location] == "" || params[:item][:category_id] == ""
+    if params[:item][:name] == "" || params[:item][:description] == "" || params[:item][:location] == "" || (params[:item][:category_id] == "" && params[:category][:name] == "")
       redirect to "/items/#{params[:id]}/edit"
     else
       @item = Item.find_by_id(params[:id])
       @item.update(params[:item])
       @item.save
 
-      if !params[:category].empty?
+      if !params[:category][:name].empty?
         @category = Category.find_or_create_by(name: params[:category][:name])
         @item.category_id == @category.id
         @item.save
