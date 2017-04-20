@@ -1,4 +1,3 @@
-require 'pry'
 class ApplicationController < Sinatra::Base
 
 	configure do
@@ -82,7 +81,7 @@ class ApplicationController < Sinatra::Base
 
     if !params[:category][:name].empty?
       @category = Category.find_or_create_by(name: params[:category][:name])
-      @item.category_id == @category.id
+      @item.category_id = @category.id
       @item.save
     end
 

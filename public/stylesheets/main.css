@@ -22,12 +22,18 @@ form input {
 	font-family: 'Fredoka One', cursive;
 }
 
+h2 {
+	font-family: 'Fredoka One', cursive;
+	color: black;
+}
+
 
 div.view {
 	border: solid black 2px;
 	background-color: white;
 	padding: 10px;
 	font-family: 'Fredoka One', cursive;
+	min-height: 400px;
 }
 
 .button_holder, div.view a {
