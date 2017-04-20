@@ -22,7 +22,7 @@ form input {
 	font-family: 'Fredoka One', cursive;
 }
 
-h2 {
+h2, form label {
 	font-family: 'Fredoka One', cursive;
 	color: black;
 }
