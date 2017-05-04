@@ -6,17 +6,19 @@
 	<h3>Location: <%= @item.location %></h3>
 	<h3>Category: <%= @item.category.name %></h3>
 
-	<% if @item.user_id == current_user.id %>
+	<% if current_user %>
+		<% if @item.user_id == current_user.id %>
 
-		<div class="btn-group" role="group">
-			<button><a href="/items/<%=@item.id%>/edit">Edit</a></button>
+			<div class="btn-group" role="group">
+				<button><a href="/items/<%=@item.id%>/edit">Edit</a></button>
 
-		 <form action="/items/<%=@item.id%>/delete" method="post">
-		  <input id="hidden" type="hidden" name="_method" value="delete">
-		  <input class="button_holder" type="submit" value="Delete">
-		</form>
-	</div>
+			 <form action="/items/<%=@item.id%>/delete" method="post">
+			  <input id="hidden" type="hidden" name="_method" value="delete">
+			  <input class="button_holder" type="submit" value="Delete">
+			</form>
+		</div>
 
+		<% end %>
 	<% end %>
 
 </div>
