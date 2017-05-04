@@ -1,11 +1,15 @@
 <h1>Sign Up</h1>
+
 <div class="view">
+	<% if @message %>
+		<h3 style="color: red;"><%= @message %></h3>
+	<% end %>
 	<form action="/signup" method="POST">
-	  <input type="text" name="username" placeholder="Username:">
+	  <input type="text" name="username" placeholder="Username:" value=<%=@user.username%>>
 	  <br></br>
 	  <input type="password" name="password" placeholder="Password:">
 	  <br></br>
-	  <input type="text" name="email" placeholder="Email:">
+	  <input type="text" name="email" placeholder="Email:" value=<%=@user.email%>>
 	  <br></br>
 	  <input type="submit" value="Sign Up">
 	</form>
