@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
+ruby '2.3.4'
 
-gem 'ruby', '2.3.4'
 gem 'sinatra'
 gem 'activerecord', :require => 'active_record'
 gem 'sinatra-activerecord', :require => 'sinatra/activerecord'
