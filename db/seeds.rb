@@ -1,16 +1,13 @@
 users =	User.create([
 		{ 
 		username: 'kel-c',
-		email: 'kelc@email.com'
-		password_digest: BCrypt::Password.create('passw0rd')},
+		email: 'kelc@email.com' },
 		{ 
 		username: 'dad',
-		email: 'dadiscool@email.com'
-		password_digest: BCrypt::Password.create('passw0rd')},
+		email: 'dadiscool@email.com' },
 		{
 		username: 'wonderwoman',
-		email: 'wonderwoman@email.com'
-		password_digest: BCrypt::Password.create('passw0rd')}
+		email: 'wonderwoman@email.com' }
 	])
 
 categories = Category.create([
